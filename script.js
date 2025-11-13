@@ -465,43 +465,66 @@ function initHeroCarousel() {
     
     let currentSlide = 0;
     const slideCount = slides.length;
+    let slideInterval;
     
-    // Show first slide immediately
-    slides[0].classList.add('active');
-    
-    // Preload all images
-    slides.forEach((slide, index) => {
-        const img = new Image();
-        img.src = slide.style.backgroundImage.replace('url("', '').replace('")', '');
-        img.onload = () => {
-            console.log(`Image ${index + 1} loaded successfully`);
-        };
-        img.onerror = () => {
-            console.error(`Failed to load image ${index + 1}`);
-        };
-    });
-    
-    // Change slide function
-    function showNextSlide() {
-        // Remove active class from current slide
-        document.querySelector('.carousel-slide.active')?.classList.remove('active');
+    // Initialize the first slide
+    function initializeCarousel() {
+        // Hide all slides first and reset styles
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.style.opacity = '0';
+        });
         
-        // Move to next slide
-        currentSlide = (currentSlide + 1) % slideCount;
+        // Show first slide
+        slides[0].classList.add('active');
+        slides[0].style.opacity = '1';
+        currentSlide = 0;
         
-        // Add active class to new slide
-        slides[currentSlide].classList.add('active');
+        // Start the carousel after a short delay
+        setTimeout(() => {
+            startCarousel();
+        }, 1000);
     }
     
-    // Start the carousel after the first image is loaded
-    const firstImg = new Image();
-    firstImg.onload = () => {
-        // Start the carousel after a short delay to ensure the first image is fully loaded
-        setTimeout(() => {
-            setInterval(showNextSlide, 5000); // Change slide every 5 seconds
-        }, 1000);
-    };
-    firstImg.src = slides[0].style.backgroundImage.replace('url("', '').replace('")', '');
+    // Start the carousel
+    function startCarousel() {
+        // Clear any existing interval
+        if (slideInterval) clearInterval(slideInterval);
+        
+        // Set new interval
+        slideInterval = setInterval(showNextSlide, 5000); // Change slide every 5 seconds
+    }
+    
+    // Change to next slide
+    function showNextSlide() {
+        // Fade out current slide
+        const currentActive = document.querySelector('.carousel-slide.active');
+        if (currentActive) {
+            currentActive.style.opacity = '0';
+            
+            // After fade out, change the slide
+            setTimeout(() => {
+                currentActive.classList.remove('active');
+                
+                // Move to next slide
+                currentSlide = (currentSlide + 1) % slideCount;
+                
+                // Show new slide
+                const nextSlide = slides[currentSlide];
+                nextSlide.classList.add('active');
+                // Force reflow to ensure the transition works
+                void nextSlide.offsetWidth;
+                nextSlide.style.opacity = '1';
+            }, 500); // Match this with the CSS transition time
+        }
+    }
+    
+    // Initialize the carousel when the page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeCarousel);
+    } else {
+        initializeCarousel();
+    }
 }
 
 // Initialize all functionality
