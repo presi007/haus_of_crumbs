@@ -5,8 +5,9 @@
     --primary-light: #8D6E63;
     --primary-dark: #3E2723;
     --secondary-color: #BCAAA4; /* Soft taupe */
-    --accent-color: #FF8A65; /* Warm coral accent */
-    --accent-hover: #FF7043; /* Darker coral on hover */
+    --accent-color: #A52A2A; /* Rich red from logo */
+    --accent-hover: #8B1A1A; /* Slightly darker red on hover */
+    --accent-light: #F5EFE6; /* Light beige for backgrounds */
     --text-color: #333333;
     --text-light: #666666;
     --light-bg: #FAFAFA;
@@ -1541,9 +1542,13 @@ nav {
 }
 
 .contact-info h2 {
-    font-size: 2.5rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
     margin-bottom: 2rem;
-    color: var(--primary-dark);
+    color: var(--accent-color);
+    display: inline-block;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     position: relative;
     display: inline-block;
 }
@@ -1561,14 +1566,14 @@ nav {
 
 .contact-method {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 2rem;
     background: white;
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
     transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(165, 42, 42, 0.1);
 }
 
 .contact-method:hover {
@@ -1585,17 +1590,64 @@ nav {
     text-align: center;
 }
 
+/* Playful Circular Icons */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #F9F3E9; /* Very light beige background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 2px solid #A52A2A; /* Logo red border */
+    transition: all 0.3s ease;
+}
+
+.icon-circle i {
+    color: #A52A2A; /* Logo red for the icon */
+    font-size: 1.5rem;
+    margin: 0;
+    min-width: auto;
+}
+
+.contact-method:hover .icon-circle {
+    transform: scale(1.1) rotate(5deg);
+    background-color: #A52A2A; /* Logo red background on hover */
+    box-shadow: 0 6px 15px rgba(165, 42, 42, 0.2);
+}
+
+.contact-method:hover .icon-circle i {
+    color: #FFFFFF; /* White icon on red background */
+}
+
+/* Specific icon colors */
+.icon-circle .fa-phone-alt {
+    color: #A52A2A; /* Logo red for phone */
+}
+
+.icon-circle .fa-whatsapp {
+    color: #25D366; /* WhatsApp green */
+}
+
+.icon-circle .fa-clock {
+    color: #5D4037; /* Dark brown for clock */
+}
+
 .contact-method h4 {
     margin: 0 0 0.5rem 0;
     color: var(--primary-dark);
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    font-family: 'Dancing Script', cursive;
 }
 
 .contact-method a, .contact-method p {
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
-    margin: 0;
+    line-height: 1.6;
+    font-size: 1.05rem;
     line-height: 1.6;
 }
 
@@ -1631,7 +1683,7 @@ nav {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #25D366;
+    background: #A52A2A; /* Logo red */
     color: white !important;
     padding: 1rem 2rem;
     border-radius: 50px;
@@ -1639,7 +1691,9 @@ nav {
     text-decoration: none;
     transition: all 0.3s ease;
     margin-top: auto;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 4px 15px rgba(165, 42, 42, 0.3);
+    border: none;
+    cursor: pointer;
 }
 
 .whatsapp-button i {
@@ -1649,8 +1703,8 @@ nav {
 
 .whatsapp-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    background: #20bd5a;
+    box-shadow: 0 8px 25px rgba(165, 42, 42, 0.5);
+    background: #8B1A1A; /* Slightly darker red on hover */
 }
 
 .order-note {
